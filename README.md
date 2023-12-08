@@ -32,23 +32,23 @@ npm install @emotion/cache @emotion/react @emotion/server @emotion/styled @formk
 npm install -D @types/cookie @types/jsonwebtoken @types/multer babel-plugin-import prisma sass
 ~~~
 
--- @mui/... - компоненти та іконки Material UI;
--- @emotion/... - рішення CSS-в-JS, яке використовується для стилізації компонентів Material UI;
--- prisma - ORM для роботи з реляційними БД PostgreSQL, MySQL, SQLite та SQL Server, а також з NoSQL-БД MongoDB і CockroachDB;
--- @prisma/client - кліент Prisma;
--- @welldone-software/why-did-you-render - корисна утиліта для налагодження React-додатків, що дозволяє визначити причину повторного рендерингу компонента;
--- argon2 - утиліта для хешування та перевірки паролів;
--- cookie - утиліта для роботи з кукі;
--- jsonwebtoken - утиліта до роботи з токенами;
--- multer - посередник (middleware) Node.js для обробки multipart/form-data (для роботи з файлами, що містяться в запиті);
--- next-connect - бібліотека, що дозволяє працювати з інтерфейсом роутів Next.js як з роутами Express;
--- react-error-boundary - компонент-запобіжник для React-додатків;
--- react-toastify - компонент та утиліта для реалізації повідомлень у React-додатках;
--- swiper - просунутий компонент слайдера;
--- swr - хуки React для запиту (отримання - fetching) даних від сервера, що дозволяють обійтися без інструменту управління станом (state manager) але пізніше також додамо окремими гілками варіанти з Redux/Mobx;
--- @types/... - відсутні типи TS;
--- babel-plugin-import - плагін Babel для ефективної "трясіння дерева" (tree shaking) при імпорті компонентів MUI за назвою;
--- sass - препроцесор CSS.
++ @mui/... - компоненти та іконки Material UI;
++ @emotion/... - рішення CSS-в-JS, яке використовується для стилізації компонентів Material UI;
++ prisma - ORM для роботи з реляційними БД PostgreSQL, MySQL, SQLite та SQL Server, а також з NoSQL-БД MongoDB і CockroachDB;
++ @prisma/client - кліент Prisma;
++ @welldone-software/why-did-you-render - корисна утиліта для налагодження React-додатків, що дозволяє визначити причину повторного рендерингу компонента;
++ argon2 - утиліта для хешування та перевірки паролів;
++ cookie - утиліта для роботи з кукі;
++ jsonwebtoken - утиліта до роботи з токенами;
++ multer - посередник (middleware) Node.js для обробки multipart/form-data (для роботи з файлами, що містяться в запиті);
++ next-connect - бібліотека, що дозволяє працювати з інтерфейсом роутів Next.js як з роутами Express;
++ react-error-boundary - компонент-запобіжник для React-додатків;
++ react-toastify - компонент та утиліта для реалізації повідомлень у React-додатках;
++ swiper - просунутий компонент слайдера;
++ swr - хуки React для запиту (отримання - fetching) даних від сервера, що дозволяють обійтися без інструменту управління станом (state manager) але пізніше також додамо окремими гілками варіанти з Redux/Mobx;
++ @types/... - відсутні типи TS;
++ babel-plugin-import - плагін Babel для ефективної "трясіння дерева" (tree shaking) при імпорті компонентів MUI за назвою;
++ sass - препроцесор CSS.
 
 ### Підготовка БД та налаштування ORM
 
@@ -79,7 +79,11 @@ npx prisma migrate dev --name init
 Виконання цієї команди призводить до генерації директорії migrations з міграцією на SQL.
 
 Зверніть увагу: при першому виконанні migrate dev автоматично встановлюється та генерується клієнт Prisma. Надалі за будь-якої зміни схеми Prisma необхідно вручну виконувати команду 
-~~~ npx prisma generate ~~~ 
+
+~~~ 
+npx prisma generate 
+~~~ 
+
 для оновлення клієнта.
 
 Також зверніть увагу, що для швидкого відновлення вихідного стану БД зі втратою всіх даних можна видалити файл dev.db і виконати команду 
