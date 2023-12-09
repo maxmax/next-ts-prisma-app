@@ -311,3 +311,7 @@ export type AuthGuardMiddleware = (
 + DELETE /api/like?likeId=<like-id>&postId=<post-id> - для видалення лайка.
 
 **Також визначаємо деякі заголовки HTTP, пов'язані з безпекою, у next.config.js для всіх роутів**
+
+## Клієнт
+
+...
