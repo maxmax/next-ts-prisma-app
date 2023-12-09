@@ -1,26 +1,22 @@
 module.exports = function (api) {
   const isServer = api.caller((caller) => caller?.isServer)
   const isCallerDevelopment = api.caller((caller) => caller?.isDev)
-  
-  // пресети
+
   const presets = [
-		[
-			'next/babel',
-			{
-				'preset-react': {
-					runtime: 'automatic',
-					importSource:
-						// код wdyr повинен виконуватися лише на клієнті
-						// і лише у режимі розробки
-						!isServer && isCallerDevelopment
-							? '@welldone-software/why-did-you-render'
-							: 'react'
-				}
-			}
-		]
+    [
+      'next/babel',
+      {
+        'preset-react': {
+          runtime: 'automatic',
+          importSource:
+            !isServer && isCallerDevelopment
+              ? '@welldone-software/why-did-you-render'
+              : 'react'
+        }
+      }
+    ]
   ]
 
-  // плагіни
   const plugins = [
     [
       'babel-plugin-import',
@@ -32,6 +28,6 @@ module.exports = function (api) {
       'core'
     ]
   ]
-  
+
   return { presets, plugins }
 }
