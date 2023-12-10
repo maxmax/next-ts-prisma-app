@@ -44,7 +44,7 @@ likeHandler.delete(async (req, res) => {
         id_userId_postId: {
           id: likeId,
           userId: req.userId,
-          postId
+          postId,
         }
       }
     })

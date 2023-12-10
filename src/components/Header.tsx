@@ -7,6 +7,7 @@ export type PageLinks = { title: string; href: string }[]
 const PAGE_LINKS = [
   { title: 'Home', href: '/' },
   { title: 'Posts', href: '/posts' },
+  { title: 'Services', href: '/services' },
   { title: 'About', href: '/about' }
 ]
 

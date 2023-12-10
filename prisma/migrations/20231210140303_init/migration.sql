@@ -19,12 +19,29 @@ CREATE TABLE "Post" (
 );
 
 -- CreateTable
+CREATE TABLE "Services" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "latitude" TEXT NOT NULL,
+    "longitude" TEXT NOT NULL,
+    "authorId" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Services_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "Like" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "userId" TEXT NOT NULL,
     "postId" TEXT NOT NULL,
+    "servicesId" TEXT NOT NULL,
     CONSTRAINT "Like_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Like_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "Like_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "Like_servicesId_fkey" FOREIGN KEY ("servicesId") REFERENCES "Services" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -32,6 +49,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Post_id_authorId_key" ON "Post"("id", "authorId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Services_id_authorId_key" ON "Services"("id", "authorId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Like_id_userId_postId_key" ON "Like"("id", "userId", "postId");

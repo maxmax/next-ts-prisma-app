@@ -19,6 +19,7 @@ model User {
   email     String  @unique
   password  String
   posts     Post[]
+  services  Services[]
   likes     Like[]
 }
 
@@ -30,6 +31,23 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   authorId  String
   likes     Like[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // unique combination of fields used to update and delete a record
+  @@unique([id, authorId])
+}
+
+// Services Model
+model Services {
+  id        String   @id @default(uuid())
+  title     String
+  type      String
+  price     String
+  content   String
+  latitude  String
+  longitude String
+  author    User     @relation(fields: [authorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  authorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   // unique combination of fields used to update and delete a record
