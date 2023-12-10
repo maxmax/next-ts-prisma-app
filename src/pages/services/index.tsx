@@ -1,7 +1,7 @@
 import Animate from 'src/components/AnimateIn'
 import CreateServiceButton from 'src/components/Buttons/CreateServices'
 import CustomHead from 'src/components/CustomHead'
-import PostPreview from 'src/components/PostPreview'
+import ServicesPreview from 'src/components/ServicesPreview'
 import prisma from 'src/utils/prisma'
 import { Divider, Grid, Typography } from '@mui/material'
 import type {
@@ -27,11 +27,7 @@ export default function Services({
           {services.map((service) => (
             <Grid item md={6} lg={4} key={service.id}>
               <Animate.FadeIn>
-                {/*<PostPreview service={service} />*/}
-                <>
-                  Test
-                  {console.log('service--', service)}
-                </>
+                <ServicesPreview services={service} />
               </Animate.FadeIn>
             </Grid>
           ))}
