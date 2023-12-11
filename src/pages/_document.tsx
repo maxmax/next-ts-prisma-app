@@ -30,12 +30,12 @@ export default function MyDocument(props: any) {
   )
 }
 
-// `getInitialProps` принадлежит `_document` (а не `_app`),
-// это совместимо с генерацией статического контента (SSG).
+// `getInitialProps` належить `_document` (а не `_app`),
+// це сумісне з генерацією статичного контенту (SSG).
 MyDocument.getInitialProps = async (docContext: DocumentContext) => {
-  // Порядок разрешения
+  // Порядок дозволу
   //
-  // На сервере:
+  // На сервері:
   // 1. app.getInitialProps
   // 2. page.getInitialProps
   // 3. document.getInitialProps
@@ -43,13 +43,13 @@ MyDocument.getInitialProps = async (docContext: DocumentContext) => {
   // 5. page.render
   // 6. document.render
   //
-  // На сервере в случае ошибки:
+  // На сервері у разі помилки:
   // 1. document.getInitialProps
   // 2. app.render
   // 3. page.render
   // 4. document.render
   //
-  // На клиенте:
+  // На клієнті:
   // 1. app.getInitialProps
   // 2. page.getInitialProps
   // 3. app.render
@@ -57,8 +57,8 @@ MyDocument.getInitialProps = async (docContext: DocumentContext) => {
 
   const originalRenderPage = docContext.renderPage
 
-  // Кэш Emotion можно распределять между всеми запросами SSR для повышения производительности.
-  // Однако это может иметь глобальные побочные эффекты.
+  // Кеш Emotion можна розподіляти між усіма запитами SSR підвищення продуктивності.
+  // Однак це може мати глобальні побічні ефекти.
   const cache = createEmotionCache()
   const { extractCriticalToChunks } = createEmotionServer(cache)
 
@@ -71,8 +71,8 @@ MyDocument.getInitialProps = async (docContext: DocumentContext) => {
     })
 
   const docProps = await Document.getInitialProps(docContext)
-  // Важно. Это не позволяет Emotion рендерить невалидный HTML.
-  // См. https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
+  // Важливо. Це не дозволяє Emotion рендерувати невалідний HTML.
+  // Див. https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
   const emotionStyles = extractCriticalToChunks(docProps.html)
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style

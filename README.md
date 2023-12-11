@@ -551,4 +551,4 @@ export default function createEmotionCache() {
 
 ### Послуги, оновлення, видалення
 
-...
+- Geo point - openstreetmap

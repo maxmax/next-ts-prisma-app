@@ -1,6 +1,8 @@
+import * as React from "react";
 import EditServicesButton from 'src/components/Buttons/EditServices'
 import RemoveServicesButton from 'src/components/Buttons/RemoveServices'
 import CustomHead from 'src/components/CustomHead'
+// import GeoPoint from 'src/components/GeoPoint'
 import prisma from 'src/utils/prisma'
 import { useUser } from 'src/utils/swr'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
@@ -20,12 +22,21 @@ import type {
   InferGetServerSidePropsType
 } from 'next'
 import Link from 'next/link'
+import dynamic from 'next/dynamic';
 
 export default function ServicesPage({
   services
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { user } = useUser()
   const isServicesBelongsToUser = user && user.id === services.authorId
+
+  const GeoPoint = React.useMemo(() => dynamic(
+    () => import('@/components/GeoPoint'),
+    { 
+      loading: () => <p>A map is loading</p>,
+      ssr: false
+    }
+  ), []) 
 
   return (
     <>
@@ -45,13 +56,14 @@ export default function ServicesPage({
             title={services.title}
             subheader={services.createdAt}
           />
-          <CardMedia
-            component='img'
-            height='200'
-            image='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
-            alt=''
+          <GeoPoint
+            position={[services.latitude, services.longitude]}
+            zoom={12}
           />
           <CardContent>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              {services.type} - {services.price}
+            </Typography>
             <Typography variant='body1'>{services.content}</Typography>
           </CardContent>
           <CardActions>
